@@ -1,0 +1,20 @@
+Spreedly Composer Client SDK for JavaScript
+Copyright 2025-2026 Spreedly, Inc.
+
+This product includes software from Smithy TypeScript
+(https://github.com/smithy-lang/smithy-typescript), adapted in src/md5.ts:
+
+  Smithy Typescript
+  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+This product includes RequireJS 2.3.8 (MIT, https://github.com/requirejs/requirejs),
+minified in src/requirejs.ts.
+
+The UMD build (dist/umd) bundles the following packages. The CommonJS and
+ES module builds import them instead, and npm installs them alongside the
+SDK. Full license texts are in THIRD-PARTY-LICENSES.
+
+- axios (MIT)
+- js-cookie (MIT)
+- lodash.clonedeep (MIT)
+- uuid (MIT)

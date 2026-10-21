@@ -1,0 +1,105 @@
+{
+  "name": "@spreedly/composer-sdk-client",
+  "version": "1.0.0",
+  "description": "Composer Client SDK",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "umd:main": "dist/umd/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm && npm run build:umd && npm run build:types",
+    "build:cjs": "node tools/cleanup cjs && tsc -p config/tsconfig.cjs.json",
+    "build:esm": "node tools/cleanup esm && tsc -p config/tsconfig.esm.json",
+    "build:umd": "node tools/cleanup umd && webpack --config config/webpack.config.js",
+    "build:types": "node tools/cleanup types && tsc -p config/tsconfig.types.json",
+    "watch": "npm-watch",
+    "link": "npm link",
+    "clean": "node tools/cleanup",
+    "vendor:requirejs": "node tools/vendor-requirejs",
+    "package": "npm run build && npm pack",
+    "test": "jest --no-cache --runInBand",
+    "test:cov": "jest --coverage --no-cache --runInBand",
+    "addscope": "node tools/packagejson name @spreedly/composer-sdk-client"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts",
+      "ignore": [
+        "dist",
+        "node_modules"
+      ],
+      "quite": true
+    },
+    "link": {
+      "patterns": [
+        "dist/types"
+      ],
+      "extensions": "ts",
+      "ignore": [
+        "src",
+        "node_modules"
+      ],
+      "delay": 4000
+    }
+  },
+  "author": "Spreedly <support@spreedly.com> (https://spreedly.com/)",
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/spreedly/composer-sdk-client-web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spreedly/composer-sdk-client-web"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "NOTICE",
+    "THIRD-PARTY-LICENSES",
+    "CHANGELOG.md"
+  ],
+  "dependencies": {
+    "axios": "^1.20.0",
+    "js-cookie": "^3.0.8",
+    "lodash.clonedeep": "^4.5.0",
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/js-cookie": "^3.0.1",
+    "@types/lodash.clonedeep": "^4.5.7",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2",
+    "npm-watch": "^0.13.0",
+    "requirejs": "2.3.8",
+    "ts-jest": "^29.4.15",
+    "ts-loader": "^9.6.2",
+    "typescript": "^4.4.3",
+    "webpack": "^5.111.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testRegex": "tests/.*|(\\.|/)(test|spec)\\.ts$",
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
+  "keywords": [
+    "spreedly",
+    "dodgeball",
+    "security",
+    "trust and safety",
+    "risk",
+    "fraud prevention",
+    "api"
+  ]
+}
