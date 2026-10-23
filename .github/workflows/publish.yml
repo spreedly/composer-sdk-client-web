@@ -76,6 +76,7 @@ jobs:
 
       # Hashed from the tarball, so it matches the file unpkg serves from npm.
       - name: Add script tag integrity to release notes
+        shell: bash
         env:
           NAME: ${{ steps.check.outputs.name }}
           VERSION: ${{ steps.check.outputs.version }}
