@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (unreleased)
+## 1.0.0 (2026-10-23)
 
 First release as `@spreedly/composer-sdk-client`. If you're upgrading from `@dodgeball/trust-sdk-client`, read **Changed**, **Deprecated** and **Removed**.
 
