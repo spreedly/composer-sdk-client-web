@@ -74,6 +74,24 @@ jobs:
           npm sbom --sbom-format cyclonedx --sbom-type library --omit dev > sbom.cdx.json
           echo "tarball=${TARBALL}" >> "${GITHUB_OUTPUT}"
 
+      # Hashed from the tarball, so it matches the file unpkg serves from npm.
+      - name: Add script tag integrity to release notes
+        shell: bash
+        env:
+          NAME: ${{ steps.check.outputs.name }}
+          VERSION: ${{ steps.check.outputs.version }}
+          TARBALL: ${{ steps.pack.outputs.tarball }}
+        run: |
+          SRI="sha384-$(tar -xzOf "${TARBALL}" package/dist/umd/index.js | openssl dgst -sha384 -binary | openssl base64 -A)"
+          {
+            echo
+            echo "### Script tag"
+            echo
+            echo '```html'
+            echo "<script src=\"https://unpkg.com/${NAME}@${VERSION}/dist/umd/index.js\" integrity=\"${SRI}\" crossorigin=\"anonymous\"></script>"
+            echo '```'
+          } >> release-notes.md
+
       # Scans the files customers receive, including built dist/. The hash pins
       # the download; --redact keeps a found secret's value out of the public
       # log while --verbose still shows where it is.
