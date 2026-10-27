@@ -147,7 +147,7 @@ function Checkout() {
 The SDK is also available from unpkg. Pin the version so a new release can't change your page without you knowing, and copy the `integrity` value for that version from its [release notes](https://github.com/spreedly/composer-sdk-client-web/releases) so the browser won't run the file if it's ever changed. `crossorigin="anonymous"` is required for the browser to check it:
 
 ```html
-<script src="https://unpkg.com/@spreedly/composer-sdk-client@1.0.0/dist/umd/index.js"
+<script src="https://unpkg.com/@spreedly/composer-sdk-client@1.0.1/dist/umd/index.js"
         integrity="sha384-..." crossorigin="anonymous"></script>
 <script>
   const composer = new Composer("public-api-key...");

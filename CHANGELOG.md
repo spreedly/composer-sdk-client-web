@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 (2026-10-27)
+
+No changes to the SDK's code.
+
+### Changed
+- The SBOM on the GitHub Release lists every runtime package, including `debug`, `ms` and `function-bind`, and names its root component `@spreedly/composer-sdk-client`.
+- The README's script tag example pins 1.0.1.
+
 ## 1.0.0 (2026-10-23)
 
 First release as `@spreedly/composer-sdk-client`. If you're upgrading from `@dodgeball/trust-sdk-client`, read **Changed**, **Deprecated** and **Removed**.
