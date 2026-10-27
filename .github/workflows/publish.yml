@@ -71,8 +71,19 @@ jobs:
         run: |
           TARBALL="$(npm pack)"
           sha256sum "${TARBALL}" > SHA256SUMS
-          npm sbom --sbom-format cyclonedx --sbom-type library --omit dev > sbom.cdx.json
-          # npm sbom names the root component after the checkout folder.
+          # npm sbom --omit dev also leaves out runtime packages that a dev
+          # dependency uses (npm/cli#7909), so build it from a copy of the
+          # lockfile without devDependencies.
+          SBOM_DIR="${RUNNER_TEMP}/sbom/composer-sdk-client"
+          mkdir -p "${SBOM_DIR}"
+          cp package.json package-lock.json "${SBOM_DIR}/"
+          (
+            cd "${SBOM_DIR}"
+            npm pkg delete devDependencies
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund > /dev/null
+            npm sbom --sbom-format cyclonedx --sbom-type library --package-lock-only
+          ) > sbom.cdx.json
+          # npm sbom names the root component after the folder it runs in.
           node -e "const fs = require('fs'); const b = JSON.parse(fs.readFileSync('sbom.cdx.json')); b.metadata.component.name = require('./package.json').name; fs.writeFileSync('sbom.cdx.json', JSON.stringify(b, null, 2) + '\n')"
           echo "tarball=${TARBALL}" >> "${GITHUB_OUTPUT}"
 
